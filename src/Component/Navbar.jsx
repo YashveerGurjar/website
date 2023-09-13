@@ -1,25 +1,14 @@
 import { styled } from 'styled-components';
-import SavedSearchIcon from '@mui/icons-material/SavedSearch';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Mobile } from './Responsive';
 
 import 'animate.css';
 function Navbar() {
     return (
         <Container>
             <Wrapper>
-                <Left>
-                    <Language>
-                        En
-                    </Language>
-                    <SeacrContainer>
-                        <Input>
-                        </Input>
-                        <SavedSearchIcon />
-                    </SeacrContainer>
-                </Left>
-
                 <Center >
                     Fashion Show
                 </Center>
@@ -35,8 +24,8 @@ function Navbar() {
 
                     <Item>
                         <IconButton aria-label="cart">
-                            <StyledBadge badgeContent={4}>
-                                <ShoppingCartIcon  style={{color:'orange'}}/>
+                            <StyledBadge badgeContent={1}>
+                                <ShoppingCartIcon  style={{color:'orange' }}/>
                             </StyledBadge>
                         </IconButton>
                     </Item>
@@ -48,7 +37,6 @@ function Navbar() {
 export default Navbar;
 
 const Container = styled.div`
-
 height:40px;
 background-color:#25435A ;
 color:white;
@@ -60,21 +48,23 @@ justify-content:space-around;
 padding:0px 10px;
 align-items: center; 
 cursor:pointer;
+${Mobile({height:"50px"})};
 
 
 `;
-const Left = styled.div`
-display:flex;
-flex:1;
-align-items:center;
-`;
+
 const Center = styled.div`
 flex:1;
 display:flex;
-justify-content:center; 
 font-size:25px;
-font-weight:bold;
+font-weight:200;
+letter-spacing:1px;
 color:#fff;
+font-family: 'Rye', cursive;
+text-shadow:3px 4px grey;
+${Mobile({fontSize:"18px"})};
+
+
 `;
 const Right = styled.div`
 flex:1;
@@ -84,24 +74,13 @@ justify-content:flex-end;
 
 
 `;
-const Language = styled.div`
 
-`;
-const SeacrContainer = styled.div`
-    border:1px solid white;
-    display:flex;
-    margin:0px 10px
-    
-`;
-const Input = styled.input`
-    border:none;
-    &:focus{
-        outline:none;
-    }  
-`; 
 const Item = styled.div`
 margin:10px;
 justify-content:flex-end;
+margin-right:50px;
+${Mobile({margin:"5px"})};
+
 
 `;
 const StyledBadge = styled(Badge)(({ theme }) => ({

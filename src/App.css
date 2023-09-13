@@ -1,5 +1,13 @@
 body{
-  background-color:#88BDBC;
+  background-color:#fff;
+  background-attachment: fixed;
+}
+.icon{
+  background-color:white;
+  transition: all 0.5s ease;
+}
+.icon:hover{
+  background-color: #88BDBC;
 }
 .App {
   text-align: center;

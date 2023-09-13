@@ -2,9 +2,9 @@ import 'animate.css';
 import { styled } from "styled-components";
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
-import img from '../Image/yash.jpg';
-import slideData from './data';
+import {slideData} from './data';
 import { useState } from 'react';
+import { Mobile } from './Responsive';
 
 
 function Slider() {
@@ -14,11 +14,11 @@ function Slider() {
     function leftclick(direction) {
         console.log(direction);
         if(direction ==="Left"){
-            setIndex(index > 0 ? index-1 : 2);
+            setIndex(index > 0 ? index-1 : slideData.length-1);
             console.log(index);
         }
         else{
-            setIndex(index > 2 ? index+1 : 0);
+            setIndex(index < slideData.length -1 ? index+1 : 0);
             console.log(index);
         }
     }
@@ -33,7 +33,8 @@ function Slider() {
 
                 <Container slideIndex={index}>
                  {slideData.map((value)=>
-                        <Slide >
+                 
+                        <Slide bg={value.bgcolor}>
                         <ImgContainer>
                             <Img src={value.img} />
                         </ImgContainer>
@@ -67,20 +68,25 @@ function Slider() {
     );
 
 }
-const Wrapper = styled.div`
-width:100%;
-height:81vh;
-display:flex;
-// background-color:#88BDBC;
-position:relative;
-overflow:hidden;
-`;
 const Container = styled.div`
 height:100%;
 display:flex;
+transition:all 1s ease ;
 transform:translateX(${(props)=>props.slideIndex *-100}vw);
-/* translate:; */
+
 `;
+const Wrapper = styled.div`
+width:95%;
+border-radius: 50px;
+height:81vh;
+margin:0px auto;
+display:flex;
+position:relative;
+overflow:hidden;
+margin-top:5px;  
+${Mobile({display:"none"})};
+`;
+
 
 const Arrow = styled.div`
 color:grey;
@@ -101,18 +107,23 @@ const Slide = styled.div`
     align-items:center;
     width:100vw;
     height:100vh;
-
+    background-color:${(props)=>props.bg};
     
 `;
 
 const ImgContainer = styled.div`
 flex:1;
-height:80%;
+height:100%;
 
+
+/* background-color:red; */
 `;
 const Img = styled.img`
-height:95%;
-mix-blend-mode:multiply;
+height:100%;
+width: 100%;
+
+/* mix-blend-mode:multiply; */
+
 
 `;
 const InfoContainer = styled.div`
@@ -120,9 +131,11 @@ flex:1;
 display: flex;
 flex-direction: column;
 height:100vh;
-text-align:center;
 justify-content: center;
 align-items:center;
+margin-bottom: 90px;
+/* z-index:1; */
+
 
 `;
 const Title1 = styled.h1`
@@ -176,6 +189,8 @@ display:flex;
 justify-content:center;
 text-align:center;
 // margin:10px;
+z-index:-1;
+${Mobile({fontSize:"8px",alignItems:"center",textWrap:"nowrap"})};
 
 
 `;
