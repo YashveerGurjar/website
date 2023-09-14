@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-
+import { Mobile } from "./Responsive";
 function MixProduct({item}){
     return (
       
@@ -24,6 +24,8 @@ overflow: visible;
 transition:all 0.5s ease;
 justify-content:space-between;  
 align-items:center;
+${Mobile({height:"200px",width:"155px",justifyContent:"space-between",margin:"1px auto"})};
+/* background-color: red; */
 
 
 `;
@@ -33,6 +35,7 @@ width:230px;
 transition:all 0.5s ease;
 z-index: 999;
 box-shadow:2px 3px grey;
+${Mobile({height:"180px",width:"150px",objectFit:"content"})};
 
 &:hover{ 
     opacity:0.7;

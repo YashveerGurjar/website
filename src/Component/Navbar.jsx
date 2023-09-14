@@ -3,6 +3,8 @@ import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Mobile } from './Responsive';
+import { Pad } from './Responsive';
+
 
 import 'animate.css';
 function Navbar() {
@@ -54,15 +56,16 @@ ${Mobile({height:"50px"})};
 `;
 
 const Center = styled.div`
-flex:1;
-display:flex;
+
+/* display:flex; */
 font-size:25px;
 font-weight:200;
 letter-spacing:1px;
 color:#fff;
 font-family: 'Rye', cursive;
 text-shadow:3px 4px grey;
-${Mobile({fontSize:"18px"})};
+${Mobile({fontSize:"1rem"})};
+${Pad({fontSize:"12px"})};
 
 
 `;
@@ -80,7 +83,7 @@ margin:10px;
 justify-content:flex-end;
 margin-right:50px;
 ${Mobile({margin:"5px"})};
-
+${Pad({fontSize:"12px"})};
 
 `;
 const StyledBadge = styled(Badge)(({ theme }) => ({

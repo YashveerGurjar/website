@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-
+import { Mobile } from "../Component/Responsive";
 
 function SingleProduct() {
     return (
@@ -101,7 +101,9 @@ const Container = styled.div``;
 
 const Wrapper = styled.div`
 display:flex;
-height:100vh;
+height:100vh;   
+${Mobile({flexDirection:"column"})};
+
 
 `;
 
@@ -109,12 +111,14 @@ const ImageContainer = styled.div`
 flex:1;
 height:100%;
 width:100%;
+
 /* background-color:red; */
 `;
 
 const Image = styled.img`
 height:90vh;
 width:80%;
+${Mobile({height:"40vh"})};
 `;
 
 
@@ -123,6 +127,7 @@ flex:1;
 /* background-color:pink; */
 height:100%;
 width:100%;
+
 
 `;
 
@@ -198,6 +203,7 @@ display:flex;
 justify-content:space-between;
 padding-right:100px;
 padding-top:50px;
+${Mobile({padding:"10px"})};
 `;
 
 const Btn1 = styled.button`
@@ -208,6 +214,7 @@ border:1px solid #88BDBC;
 background-color:#fff;
 font-weight:bold;
 border-radius:10px;
+${Mobile({width:"150px"})};
 /* transition: all 0.5s ease; */
 &:hover{
     
@@ -224,6 +231,7 @@ font-weight:bold;
 border-radius:10px;
 transition: all 0.5s ease;
 cursor: pointer;
+${Mobile({width:"150px"})};
 
 &:hover{
     color:#000;

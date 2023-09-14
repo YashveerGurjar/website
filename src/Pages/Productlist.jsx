@@ -5,22 +5,24 @@ import Announcement from '../Component/Announcment';
 import Footer from "../Component/Footer";
 import { styled } from "styled-components";
 import BoysProduct from "../Component/AllBoysproduct";
-
-function ProductList(){
-    return(
+import { Mobile } from "../Component/Responsive";
+function ProductList() {
+    return (
         <Container>
-        
-        <Announcement/>
-        <Navbar />
-        <BoysProduct/>
-        <Footer />
-        
-        </Container> 
+
+            <Announcement />
+            <Navbar />
+            <BoysProduct />
+            <Footer />
+
+        </Container>
     )
 
 
 }
-const Container=styled.div`
+const Container = styled.div`
+
+${Mobile({ })};
 `;
 
 

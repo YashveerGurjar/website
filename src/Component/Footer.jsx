@@ -6,15 +6,15 @@ const Container = styled.div`
     display:flex;
     background-color:#7dcccb;
     margin-top:30px;
-    height:50vh;
-    ${Mobile({flexDirection:"column",height:"100vh"})};
+    height:56vh;
+    ${Mobile({flexDirection:"column",height:"75vh"})};
 `;
 const Left = styled.div`
     flex:1;
     display:flex;
     flex-direction:column;
     padding:20px;
-    ${Mobile({padding:"10px",fontSize:"14px"})};
+    ${Mobile({flex:"0",padding:"10px",fontSize:"14px" })};
 `
 const Logo = styled.h1`
 text-align:center;
@@ -24,7 +24,7 @@ ${Mobile({fontSize:"20px"})}
 const Desc = styled.p`
     margin:20px 0;
     text-align:justify;
-    ${Mobile({margin:"0px"})}
+    ${Mobile({margin:"0px 0px"})};
 
 
 `
@@ -54,13 +54,14 @@ const  SocialIcon= styled.div`
 const Center = styled.div`
     flex:1;
     padding:20px;
-    ${Mobile( {padding:"0px"})}
+    ${Mobile( {flex:"0",padding:"0px"})};
+     
 
 `
 const Title = styled.h1`
     margin-bottom:30px;
     text-align:center;
-    ${Mobile({fontSize:"20px",marginBottom:"20px"})}
+    ${Mobile({fontSize:"20px",marginBottom:"20px"})};
 `
 const List = styled.ul`
     margin:0;
@@ -85,6 +86,7 @@ const ContactItem = styled.div`
     align-items:center;
     padding:5px;
     margin-left:90px;
+    ${Mobile({marginBottom:"5px"})};
 `
 const Footer = () => {
   return (

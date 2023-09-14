@@ -4,7 +4,7 @@ import '../App.css';
 import { styled } from "styled-components";
 import MixProduct from "./MixProduct";
 import ReplyIcon from '@mui/icons-material/Reply';
-
+import { Mobile } from "./Responsive";
 function BoysProduct() {
     return (
         <Container>
@@ -94,6 +94,8 @@ width:100%;
 margin-top:30px;
 display:flex;
 align-items:center;
+${Mobile({justifyContent:"space-around"})};
+
 `;
 
 const Title = styled.div`
@@ -105,6 +107,8 @@ const Title = styled.div`
   display:flex;
   justify-content:center;
   align-items:center; 
+  
+  
 `;
 
 const Icon = styled.div`
@@ -113,6 +117,7 @@ const Icon = styled.div`
     display:flex;
     justify-content:center;
     align-items:center;  
+    ${Mobile({height:"20px",marginTop:"10px" })};
 `;
 
 const FilterProduct = styled.div``;
