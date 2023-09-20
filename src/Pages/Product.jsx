@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from '../Component/Navbar';
+// import Navbar from '../Component/Navbar';
 import Footer from "../Component/Footer";
 import { styled } from "styled-components";
 import shirt1 from '../Image/shirt1.jpg';
@@ -12,7 +12,7 @@ import { Mobile } from "../Component/Responsive";
 function SingleProduct() {
     return (
         <Container>
-            <Navbar />
+            {/* <Navbar /> */}
             <Wrapper>
                 <ImageContainer>
                     <Image src={shirt1} />

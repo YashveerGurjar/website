@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import Navbar from '../Component/Navbar';
+// import Navbar from '../Component/Navbar';
 import Footer from "../Component/Footer";
 import jens1 from "../Image/jens1.jpg";
 import AddIcon from '@mui/icons-material/Add';
@@ -8,7 +8,7 @@ import Announcement from "../Component/Announcment";
 function Cart() {
     return (
         <Container>
-            <Navbar />
+            {/* <Navbar /> */}
             <Announcement/>
             <Wrapper>
                 <Title>

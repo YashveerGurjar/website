@@ -5,7 +5,9 @@ import { styled } from "styled-components";
 import MixProduct from "./MixProduct";
 import ReplyIcon from '@mui/icons-material/Reply';
 import { Mobile } from "./Responsive";
+import { useNavigate } from 'react-router-dom';
 function BoysProduct() {
+    const navigate=useNavigate();
     return (
         <Container>
                 <Titlecontainer>
@@ -70,7 +72,7 @@ function BoysProduct() {
                 }
             </Component>
 
-            <Icon>
+            <Icon  onClick={()=>{navigate("/")}}>
                 <ReplyIcon className="icon" style={{ border: "2px solid #88BDBC", padding: "5px 30px", cursor: "pointer", transition: "all 0.5s ease" }} ></ReplyIcon>
             </Icon>
         </Container>

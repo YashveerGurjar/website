@@ -5,10 +5,11 @@ import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import {slideData} from './data';
 import { useState } from 'react';
 import { Mobile } from './Responsive';
-
+import { useNavigate } from 'react-router-dom';
+// import { Container } from '@mui/material';
 
 function Slider() {
-
+    const navigate=useNavigate();
     const[index,setIndex]=useState(0);
     
     function leftclick(direction) {
@@ -45,7 +46,7 @@ function Slider() {
                             <Title3> {value.title3} </Title3>
                             <Title4 className="animate__animated animate__heartBeat animate__infinite infinite "> {value.title4} </Title4>
                             <Title5> {value.title5} </Title5>
-                            <Button> Buy Now</Button>
+                            <Button onClick={()=>{navigate("/ProductList")}}> Buy Now</Button>
                         </InfoContainer>
                     </Slide>
                )}

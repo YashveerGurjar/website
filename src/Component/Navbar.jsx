@@ -4,10 +4,10 @@ import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Mobile } from './Responsive';
 import { Pad } from './Responsive';
-
-
 import 'animate.css';
+import { useNavigate } from 'react-router-dom';
 function Navbar() {
+    const navigate=useNavigate();
     return (
         <Container>
             <Wrapper>
@@ -16,15 +16,15 @@ function Navbar() {
                 </Center>
 
                 <Right>
-                    <Item>
+                    <Item onClick={()=>{navigate("/Login")}}> 
                         Login
                     </Item>
 
-                    <Item>
+                    <Item onClick={()=>{navigate("/Register")}}>
                         Register
                     </Item>
 
-                    <Item>
+                    <Item onClick={()=>{navigate("/Cart")}}>
                         <IconButton aria-label="cart">
                             <StyledBadge badgeContent={1}>
                                 <ShoppingCartIcon  style={{color:'orange' }}/>

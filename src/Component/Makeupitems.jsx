@@ -1,11 +1,12 @@
 import { styled } from "styled-components";
 import { Mobile } from "./Responsive";
-
+import { useNavigate } from "react-router-dom";
 function Makeup({item}){
+    const navigate=useNavigate();
     return (
       
         <Container>
-        <Wrapper>
+        <Wrapper onClick={()=>{navigate("/SingleProduct")}}>
             <Image src={item.img}/>
            
         </Wrapper>
@@ -18,13 +19,13 @@ flex:1;
 `;
 
 const Wrapper = styled.div`
-height:300px;
+height:275px;
 width: 320px;
-flex:1;
-overflow: visible;
+flex:1; 
 transition:all 0.5s ease;
-justify-content:space-between;  
-align-items:center;
+display: flex;
+justify-content: center;
+align-items: baseline;
 ${Mobile({ height: "200px",width:"180px"})};
 
 `;
@@ -33,6 +34,7 @@ height:250px;
 width:230px;
 transition:all 0.5s ease;
 z-index: 999;
+margin:1px auto;
 
 &:hover{ 
     opacity:0.7;

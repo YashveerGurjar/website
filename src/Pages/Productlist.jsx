@@ -1,6 +1,6 @@
 import React from "react";
 // import { ReactDOM } from "react";
-import Navbar from '../Component/Navbar'
+// import Navbar from '../Component/Navbar';
 import Announcement from '../Component/Announcment';
 import Footer from "../Component/Footer";
 import { styled } from "styled-components";
@@ -11,7 +11,7 @@ function ProductList() {
         <Container>
 
             <Announcement />
-            <Navbar />
+            {/* <Navbar /> */}
             <BoysProduct />
             <Footer />
 

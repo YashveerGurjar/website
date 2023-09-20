@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { Mobile } from "./Responsive";
+
 function CategorieItem({ value }) {
     return (
         <Container>

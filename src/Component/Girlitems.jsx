@@ -1,11 +1,12 @@
 import { styled } from "styled-components";
 import { Mobile } from "./Responsive";
-
+import { useNavigate } from "react-router-dom";
 function Girls({item}){
+    const navigate=useNavigate();
     return (
       
         <Container>
-        <Wrapper>
+        <Wrapper onClick={()=>{navigate("/SingleProduct")}}>
             <Image src={item.img}/>
            
         </Wrapper>
@@ -22,11 +23,13 @@ const Wrapper = styled.div`
 height:275px;
 width: 320px;
 flex:1;
-overflow: visible;
+overflow: visible; 
 transition:all 0.5s ease;
-justify-content:space-between;  
-display:flex;
-align-items:center;
+/* justify-content:space-between;   */
+/* align-items:center; */
+display: flex;
+justify-content: center;
+align-items: baseline;
 ${Mobile({ height: "200px",width:"180px"})};
 
 `;

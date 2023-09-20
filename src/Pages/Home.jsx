@@ -1,6 +1,6 @@
 // import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import React from 'react';
-import Navbar from '../Component/Navbar';
+// import Navbar from '../Component/Navbar';
 import Announcement from '../Component/Announcment';
 import Slider from '../Component/Slider';
 // import CategorieItem from '../Component/CategorieItem';
@@ -15,7 +15,7 @@ function Home() {
     return (
         <div>
             <Announcement />
-            <Navbar />
+            {/* <Navbar /> */}
             <Slider />
             <Categories />
             <MenCollection />
