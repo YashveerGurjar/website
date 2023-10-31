@@ -6,7 +6,7 @@ function Girls({item}){
     return (
       
         <Container>
-        <Wrapper onClick={()=>{navigate("/SingleProduct")}}>
+        <Wrapper onClick={()=>{navigate(`/Product/${item.cat}`)}}>
             <Image src={item.img}/>
            
         </Wrapper>

@@ -1,7 +1,27 @@
 import { styled } from "styled-components";
 import  SendIcon from '@mui/icons-material/Send';
 import { Mobile } from "./Responsive";
+import axios from "axios";
+import {useState } from "react";
 function News(){
+    var [inputdata, setInputdata] = useState("");
+    console.log(inputdata);
+    const sendMail = async (e) => {
+        e.preventDefault();
+        // const username=localStorage.getItem("username");
+        const maildata = {
+            inputdata
+        }
+        const res = await axios.post("http://localhost:5000/api/Mail", maildata);
+        // console.log("data after sending mail",res.status);
+        if (res.status===200){
+            setInputdata("");
+            alert("Message Sent");
+        }
+       
+    }
+  
+
     return(
         <Container>
                 <Title>
@@ -12,12 +32,13 @@ function News(){
                 </DES>
           
                 <Inputcontainer>
-                <Input placeholder="Your Email ?" type="Email"/>
-                <SendIcon style={{fontSize:"30px",marginTop:"5px",marginLeft:"4px",color:"#fff",cursor:"pointer"}}></SendIcon>
+                <Input placeholder="Your Email ?" value={inputdata} type="Email" onChange={(e) => setInputdata(e.target.value)}/>
+                <SendIcon onClick={sendMail} style={{fontSize:"30px",marginTop:"5px",marginLeft:"4px",color:"#fff",cursor:"pointer"}}></SendIcon>
                 </Inputcontainer>
         </Container>
     )
 }
+
 const Container=styled.div`
 height:50vh;
 width:70%;

@@ -1,21 +1,26 @@
 import { styled } from "styled-components";
 import { Mobile } from "./Responsive";
+import {NavLink } from "react-router-dom";
 
 function CategorieItem({ value }) {
     return (
         <Container>
+            <NavLink to={`/Product/${value.cat}`}>
             <Wrapper>
                 <Image src={value.img} />
                 <Info>
                     <Title>{value.title}</Title>
                 </Info>
             </Wrapper>
+            </NavLink>
+            
         </Container>
     )
 }
 const Container = styled.div`
 flex:1;
 display:flex;
+justify-content:center;
 
 `;
 
@@ -51,6 +56,7 @@ ${Mobile({ height: "150px", width: "160px", })};
 
 const Title = styled.h2`
 text-align:center;
+text-decoration: none;
 `;
 
 const Info = styled.div`

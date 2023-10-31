@@ -6,7 +6,7 @@ const Container = styled.div`
     display:flex;
     background-color:#7dcccb;
     margin-top:30px;
-    height:56vh;
+    height:40vh;
     ${Mobile({flexDirection:"column",height:"75vh"})};
 `;
 const Left = styled.div`

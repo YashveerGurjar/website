@@ -5,8 +5,7 @@ import kidsimg from '../Image/newkids.jpg';
 import ldki from '../Image/girl1.jpg';
 import ldka from '../Image/yash-modified.jpg';
 import kid from '../Image/chaprikid.png';
-import beauty from '../Image/makeup2.png';
-import jewerlly from '../Image/jewll2.jpg';
+// import beauty from '../Image/makeup2.png';
 // -----------------------------------------
 import jeans from '../Image/menc1.jpg';
 import shirt from '../Image/menc2.jpg';
@@ -83,50 +82,55 @@ export const container =[
     {
         id:1,
         img:ldki,
-        title:"WOMENSWEAR"
+        title:"WOMENSWEAR",
+        cat:"Women"
     },
     {
         id:2,
         img:ldka,
-        title:"MENSWEAR"
+        title:"MENSWEAR",
+        cat:"Men"
     },
     {
         id:3,
         img:kid,
-        title:"KIDSWEAR"
-    },
-    {
-        id:4,
-        img:beauty,
-        title:"BEAUTY"
+        title:"KIDSWEAR",
+        cat:"Kids"
     },
     // {
     //     id:4,
-    //     img:jewerlly,
-    //     title:"JEWELLERY"
+    //     img:beauty,
+    //     title:"BEAUTY",
+    //     cat:"beauty"
     // },
+  
 ]
 
 export const menfashion=[
     {
         id:1,
         img:jeans,
-        title:"JEANS"
+        title:"JEANS",
+        cat:"jeans"
     },
     {
         id:2,
         img:shirt,
-        title:"SHIRT"
+        title:"SHIRT",
+        cat:"shirt"
     },
     {
         id:3,
         img:suits,
-        title:"SUITS"
+        title:"SUITS",
+        cat:"suit"
     },
     {
         id:4,
         img:tishirt,
-        title:"TI-SHRT"
+        title:"TI-SHRT",
+        cat:"tishirt"
+
     }
 
 ]
@@ -134,22 +138,26 @@ export const womenfashion=[
     {
         id:1,
         img:tops,
-        title:"TOPS"
+        title:"TOPS",
+        cat:"top"
     },
     {
         id:2,
         img:girlsuits,
-        title:"SUITS"
+        title:"SUITS",
+        cat:"top"
     },
     {
         id:3,
         img:girlcroptop,
-        title:"CROPTOP"
+        title:"CROPTOP",
+        cat:"top"
     },
     {
         id:4,
         img:girlsaree,
-        title:"GIRL_SAREE"
+        title:"GIRL_SAREE",
+        cat:"saree"
     }
 
 ]
@@ -158,21 +166,24 @@ export const kidsfashion=[
     {
         id:1,
         img:kidfashion,
+        cat:"kurtapyjama"
         
     },
     {
         id:2,
         img:kiddress,
+        cat:"kidsweatshirt"
         
     },
     {
         id:3,
         img:kidtishirt,
-        
+        cat:"kidtishirt"
     },
     {
         id:4,
         img:kidsleepwear,
+        cat:"kidtishirt"
         
     }
 

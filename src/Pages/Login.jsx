@@ -2,41 +2,53 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-// import React, { useEffect } from "react";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Loginapi } from "../Redux/Apicall";
 
 export default function Login() {
+  const { isfetching, error, currentUser } = useSelector((state) => state.user);
+  console.log("data in userstate=");
+
   const navigate = useNavigate();
-  // useEffect(()=>{
-  //   const login=localStorage.getItem("login");
-  //   if(login){
-  //     navigate("/");
-  //   }
-// })
+  const dispatch = useDispatch();
 
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const email = data.get("email");
+    const username = data.get("username");
     const password = data.get("password");
+    if (!username || !password) {
+      alert("plzz fill the required details");
 
-    if (email==="Admin" && password==="Admin") {
-      navigate("/");
-      localStorage.setItem("login",true);
+    } else {
+      const loginData = await Loginapi(dispatch, { username, password });
+      if (loginData === "Valid") {
+        localStorage.setItem("login", true);
+        navigate("/");
+      }
+      else if(loginData==="User"){
+        alert("Username is not valid")
+      }
+      else{
+        alert("Password is not valid")
+
+
+      }
+
+
     }
 
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
-  };
 
+
+
+
+  }
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -50,16 +62,17 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Login
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" autoComplete="off" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="username"
+            label="Username"
+            name="username"
+            
             autoFocus
+            
           />
           <TextField
             margin="normal"
@@ -80,6 +93,7 @@ export default function Login() {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            disabled={isfetching}
           >
             Sign In
           </Button>
@@ -90,7 +104,7 @@ export default function Login() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link sx={{ cursor: "pointer" }} variant="body2" onClick={() => navigate("/Register")}>
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

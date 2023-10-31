@@ -1,96 +1,94 @@
 import { styled } from "styled-components";
-// import Navbar from '../Component/Navbar';
 import Footer from "../Component/Footer";
-import jens1 from "../Image/jens1.jpg";
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import Announcement from "../Component/Announcment";
+import StripeCheckout from 'react-stripe-checkout';
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { removeCart } from "../Redux/CartRedux";
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+
 function Cart() {
+    const dispatch=useDispatch()
+    const navigate=useNavigate()
+    const cart = useSelector((state) => state.cart)
+    
     return (
         <Container>
-            {/* <Navbar /> */}
-            <Announcement/>
             <Wrapper>
                 <Title>
                     YOUR BAG
                 </Title>
                 <Top>
-                    <TopButton >Continue Shopping </TopButton>
+                    <TopButton onClick={()=>{navigate("/Product")}} >Continue Shopping </TopButton>
 
-                    <TopTexts>
+                    {/* <TopTexts>
 
                         <TopText> Shopping bag (2)</TopText>
                         <TopText> Shopping Whishlist(0) </TopText>
 
-                    </TopTexts>
+                    </TopTexts> */}
 
-                    <TopButton type={"right"}>Checkout</TopButton>
+                    {/* <TopButton type={"right"}>Checkout</TopButton> */}
 
                 </Top>
                 <Buttom>
                     <Info>
-                        <Product>
-                            <ProductDetail>
-                                <Image src={jens1}/>
+                        {cart.product.map((data,index) => (<Product>
+                            <ProductDetail key={index}>
+                                <Image src={data.img} />
                                 <Detail>
-                                    <Pname><b>Product:</b>JENS</Pname>
-                                    <Pid><b>ID:</b>9012364597</Pid>
-                                    <Psize><b>Size:</b>37.5</Psize>
-                                    <ProductColor color="lightblue"/>
+                                   
+                                    <Pname><b>product:</b>{data.info}</Pname>
+                                    <Pid> <b>ID:</b>{data._id}</Pid>
+                                    <Psize><b>Size:</b>{data.sizedata}</Psize>
+                                    <b>Color:</b>
+                                    <ProductColor bg={data.colordata}></ProductColor>
                                 </Detail>
                             </ProductDetail>
 
                             <PriceDetail>
                                 <ProductAmountContainer>
-                                      <RemoveIcon />
-                                    <ProductAmount>2</ProductAmount>
-                                    <AddIcon /> 
-                                </ProductAmountContainer>
-                                <ProductPrice>$30</ProductPrice>
-                            </PriceDetail>
-                        </Product>
-                        <Hr></Hr>
-                        <Product>
-                            <ProductDetail>
-                                <Image src={jens1}/>
-                                <Detail>
-                                    <Pname><b>Product:</b>Tishirt</Pname>
-                                    <Pid><b>ID:</b>9012364597</Pid>
-                                    <Psize><b>Size:</b>37.5</Psize>
-                                    <ProductColor color="lightblue"/>
-                                </Detail>
-                            </ProductDetail>
 
-                            <PriceDetail>
-                                <ProductAmountContainer>
-                                      <RemoveIcon />
-                                    <ProductAmount>1</ProductAmount>
-                                    <AddIcon /> 
+                                    <ProductAmount>{data.quantity}</ProductAmount>
+
                                 </ProductAmountContainer>
-                                <ProductPrice>$30</ProductPrice>
+                                <ProductPrice><b> ₹</b>{data.amount}</ProductPrice>
                             </PriceDetail>
-                        </Product>
+                            <div style={{marginRight:"20px"}}><HighlightOffIcon onClick={()=>dispatch(removeCart(index))}/></div>
+                        </Product>))
+
+                        }
                     </Info>
                     <Summary>
-                    <SummaryTitle>ORDER SUMMARY</SummaryTitle>
+                        <SummaryTitle>ORDER SUMMARY</SummaryTitle>
                         <SummaryItem>
-                        <SummaryItemText>Subtotal</SummaryItemText>
-                        <SummaryItemPrice>$ 80</SummaryItemPrice>
-                        </SummaryItem>   
-                        <SummaryItem>
-                        <SummaryItemText>Estimated Shipping</SummaryItemText>
-                        <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+                            <SummaryItemText>Subtotal</SummaryItemText>
+                            <SummaryItemPrice>{cart.total}</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem>
-                        <SummaryItemText>Shipping Discount</SummaryItemText>
-                        <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+                            <SummaryItemText>Estimated Shipping</SummaryItemText>
+                            <SummaryItemPrice>{cart.total==0 ? "₹00 ": "₹100"}</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem>
-                        <SummaryItemText tpe="total"> Total</SummaryItemText>
-                        <SummaryItemPrice>$ 80</SummaryItemPrice>
+                            <SummaryItemText>Shipping Discount</SummaryItemText>
+                            <SummaryItemPrice> {cart.total==0 ? "₹00 ": "₹100"}</SummaryItemPrice>
+                        </SummaryItem>
+                        <SummaryItem>
+                            <SummaryItemText tpe="total"> Total</SummaryItemText>
+                            <SummaryItemPrice>{cart.total}</SummaryItemPrice>
                         </SummaryItem>
                         <ButtonContainer>
-                        <Button>CHECKOUT NOW</Button>
+                             <StripeCheckout
+                            name="Fashion show"
+                            billing address
+                            shippingAddress
+                            description='your total is 100'
+                            amount={100}
+
+                            stripeKey="pk_test_51NxRRySGdJUYmKpcjA7zghgzYRWUIidZ69P9y5rmn73Xj4QvLc34SiwndjaE5NxddvdIJj9puEJ2XPYpRhXNZUlG00cTWK8zDe">
+                          <Button>Buy</Button>
+                        </StripeCheckout>
+
+                            
                         </ButtonContainer>
                     </Summary>
                 </Buttom>
@@ -104,6 +102,7 @@ background-color:#fff;
 `;
 const Wrapper = styled.div`
 padding:20px;
+margin-top:35px;
 `;
 const Title = styled.div`
 text-align:center;
@@ -187,26 +186,26 @@ const ProductColor = styled.div`
 height:20px;
 width:20px;
 border-radius:50px;
-background-color:${(props)=>props.color};
+background-color:${(props) => props.bg};
 border:1px solid black;
 `;
 
-const ProductAmountContainer= styled.div`
+const ProductAmountContainer = styled.div`
 display:flex;
 align-items:center;
 padding:20px;
 `;
-const ProductPrice=styled.div`
+const ProductPrice = styled.div`
 font-weight:bold;
 font-size:30px;`;
-const ProductAmount=styled.div`
+const ProductAmount = styled.div`
 margin:10px;
 `;
-const Hr=styled.hr`
+const Hr = styled.hr`
 /* border:1px dotted grey;
 background-color:#e5e1e1;
 */
-`; 
+`;
 const Summary = styled.div`
 flex:1;
 border:0.5px solid lightgray;
@@ -215,26 +214,26 @@ padding:20px;
 box-sizing:border-box;
 position:relative;
 `;
-const  SummaryTitle = styled.h1`
+const SummaryTitle = styled.h1`
 font-weight:400;
 `;
-const  SummaryItem = styled.div`
+const SummaryItem = styled.div`
 display:flex;
 justify-content:space-between;
 `;
-const  SummaryItemText = styled.span`
+const SummaryItemText = styled.span`
 margin:22px 0px;
 `;
-const  SummaryItemPrice = styled.span`
+const SummaryItemPrice = styled.span`
 margin:22px 0px;
 `;
-const ButtonContainer=styled.div`
+const ButtonContainer = styled.div`
 text-align:center;
 position:absolute;
 bottom:0;
 width:100%;
 `;
-const  Button = styled.button`
+const Button = styled.button`
 background-color:green;
 height:40px;
 width:200px;

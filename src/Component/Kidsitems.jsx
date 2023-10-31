@@ -6,7 +6,7 @@ function Kids({item}){
     return (
       
         <Container>
-        <Wrapper onClick={()=>{navigate("/SingleProduct")}}>
+        <Wrapper onClick={()=>{navigate(`/Product/${item.cat}`)}}>
             <Image src={item.img}/>
            
         </Wrapper>
@@ -22,7 +22,7 @@ display: flex;
 const Wrapper = styled.div`
 height:275px;
 width: 320px;
-flex:1; 
+flex:1;  
 transition:all 0.5s ease;
 display: flex;
 justify-content: center;

@@ -16,11 +16,13 @@ const Container=styled.div`
 display:flex;
 background-color:#88BDBC;
 justify-content:center;
+
 color:white ;
 font-weight:bold;
 height:30px;
 align-items:center;
 letter-spacing:2px;
+z-index:999;
 ${Mobile({fontSize:"12px",})};
 
 `;

@@ -7,7 +7,7 @@ const navigate=useNavigate();
     return (
 
         <Container>
-            <Wrapper onClick={()=>{navigate("/SingleProduct")}}>
+            <Wrapper onClick={()=>{navigate(`/Product/${item.cat}`)}}>
                 <Image src={item.img} />
 
             </Wrapper>
@@ -17,6 +17,7 @@ const navigate=useNavigate();
 
 const Container = styled.div`
 flex:1;
+display:flex;
 `;
 
 const Wrapper = styled.div`
@@ -29,7 +30,7 @@ transition:all 0.5s ease;
 /* align-items:center; */
 display: flex;
 justify-content: center;
-align-items: baseline;
+align-items: baseline; 
 ${Mobile({ height: "200px", width: "180px" })};
 /* background-color:black */
 

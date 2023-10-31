@@ -1,7 +1,7 @@
 // import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import React from 'react';
 // import Navbar from '../Component/Navbar';
-import Announcement from '../Component/Announcment';
+// import Announcement from '../Component/Announcment';
 import Slider from '../Component/Slider';
 // import CategorieItem from '../Component/CategorieItem';
 import Categories from '../Component/Categories';
@@ -14,7 +14,7 @@ import Footer from '../Component/Footer';
 function Home() {
     return (
         <div>
-            <Announcement />
+           
             {/* <Navbar /> */}
             <Slider />
             <Categories />
@@ -24,15 +24,8 @@ function Home() {
             <BeautyCollection />
             <News />
             <Footer />
-
-
-            {/* <BrowserRouter>
-                <Routes>
-                    <Route>
-                
-                    </Route>
-                </Routes>
-            </BrowserRouter> */}
+            
+    
         </div>
     )
 

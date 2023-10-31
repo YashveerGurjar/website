@@ -6,7 +6,7 @@ function Makeup({item}){
     return (
       
         <Container>
-        <Wrapper onClick={()=>{navigate("/SingleProduct")}}>
+        <Wrapper onClick={()=>{navigate("/Product/all")}}>
             <Image src={item.img}/>
            
         </Wrapper>
@@ -16,6 +16,7 @@ function Makeup({item}){
  
 const Container = styled.div`
 flex:1;
+display:flex;
 `;
 
 const Wrapper = styled.div`

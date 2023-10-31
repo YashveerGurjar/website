@@ -1,13 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import {Grid,Paper,Avatar, Typography,TextField, Checkbox, Stack, Button} from '@mui/material';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import img from '../Image/reg1.jpg';
+import { useDispatch } from "react-redux";
+import { Registerapi } from "../Redux/Apicall";
+import { useNavigate } from "react-router-dom";
 function Signup(){
+    const navigate=useNavigate()
+    const dispatch=useDispatch()
+    const [username,setUsername]=useState("")
+    const [email,setEmail]=useState("")
+    const [password,setPassword]=useState("")
+
+   async function  handelsubmit(e){
+            e.preventDefault();
+       const data={
+        username,email,password
+       }     
+    //    console.log("data in register form==",data);
+
+       if(!username || !email || !password){
+        alert("plzz fill the required details");
+    }else{
+const registerData=await  Registerapi(dispatch,data)
+if (registerData){
+setUsername("")
+setEmail("")
+setPassword("")
+navigate("/Login")
+}
+}
+    }
+    function handelCancel(e){
+        e.preventDefault()
+        setUsername("")
+        setEmail("")
+        setPassword("")
+    }
+    
+
     return(
-        <Grid style={{backgroundImage:`url(${img})`, backgroundRepeat:"no-repeat",backgroundSize:"cover",backgroundAttachment:"fixed"}}>
+        <Grid style={{backgroundImage:`url(${img})`, backgroundRepeat:"no-repeat",backgroundSize:"cover",backgroundAttachment:"fixed",height:"100vh"}}>
             <Paper elevation={0} align="center" sx={{ width:"350px", marginLeft:"90px ",background:"transparent"}}>
 
-            <Avatar sx={{bgcolor:"#00acee"}}>
+            <Avatar sx={{bgcolor:"#00acee",}}>
                 <LockOpenIcon></LockOpenIcon>                
             </Avatar>
             <Typography variant="h5" sx={{margin:"10px",fontWeight:"bold",bgcolor:"#00acee"}}>
@@ -16,19 +52,15 @@ function Signup(){
             <Typography sx={{margin:"10px 0px 10px 0px"}}>
                     Please fill this form
             </Typography>
-            <form sx={{background:"transparent"}}    >
-            <TextField id="Fname" label="FirstName" variant="outlined" fullWidth sx={{margin:"10px auto"}}/>
-            <TextField id="Lname" label="LastName" variant="outlined" fullWidth sx={{margin:"10px auto"}}/>
-            <TextField id="Mail" label="Email" variant="outlined" fullWidth sx={{margin:"10px auto"}}/>
-            <TextField type="password" id="Password" label="Password" variant="outlined" fullWidth sx={{margin:"10px auto"}}/>
-            <TextField type="password" id="Confirm-Password" label="Confirm-Password" variant="outlined" fullWidth sx={{margin:"10px auto"}}/>
-            
+            <form onSubmit={handelsubmit} autocomplete="off" sx={{background:"transparent"}}    >
+            <TextField id="username" value={username} label="userName" variant="outlined" onChange={(e)=>setUsername(e.target.value)} fullWidth sx={{margin:"30px auto"}}/>
+            <TextField id="email"  value={email} label="email" variant="outlined"  onChange={(e)=>setEmail(e.target.value)} fullWidth sx={{margin:"30px auto"}}/>
+            <TextField type="password" value={password} id="password" label="password" variant="outlined"  onChange={(e)=>setPassword(e.target.value)} fullWidth sx={{margin:"30px auto"}}/>            
             <Checkbox /> 
             I agree on <a href="#"> terms & conditions </a>
             <Stack spacing={2}>
-                <Button variant="contained" color="success">Register</Button>
-                <Button variant="contained" color="error">Cancel</Button>
-                
+                <Button type="submit" variant="contained" color="success">Register</Button>
+                <Button  variant="contained" color="error" onClick={handelCancel} >Cancel</Button>
             </Stack>
             </form>
             </Paper>
@@ -36,6 +68,11 @@ function Signup(){
     )
 }
 export default Signup;
+
+
+
+
+
 // / import { styled } from "styled-components";
 // import HowToRegIcon from '@mui/icons-material/HowToReg';
 // function Register(){
@@ -52,8 +89,8 @@ export default Signup;
 //                      <input type="text" placeholder="User Name"/>
 //                      <label>Email</label>
 //                      <input type="text" placeholder="Email"/>
-//                      <label>Password</label>
-//                      <input type="text" placeholder="Password"/>
+//                      <label>password</label>
+//                      <input type="text" placeholder="password"/>
 
 //                     <Agg>
 //                       By creating  an account you agree to our <a href="#home">terms & condition</a>.

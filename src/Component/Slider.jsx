@@ -46,7 +46,7 @@ function Slider() {
                             <Title3> {value.title3} </Title3>
                             <Title4 className="animate__animated animate__heartBeat animate__infinite infinite "> {value.title4} </Title4>
                             <Title5> {value.title5} </Title5>
-                            <Button onClick={()=>{navigate("/ProductList")}}> Buy Now</Button>
+                            <Button onClick={()=>{navigate("/Product")}}> Buy Now</Button>
                         </InfoContainer>
                     </Slide>
                )}
@@ -84,7 +84,7 @@ margin:0px auto;
 display:flex;
 position:relative;
 overflow:hidden;
-margin-top:5px;  
+margin-top:10px;  
 ${Mobile({display:"none"})};
 `;
 

@@ -1,23 +1,30 @@
 import { styled } from "styled-components";
 import { Mobile } from "./Responsive";
+import { NavLink } from "react-router-dom";
 function MixProduct({item}){
+    // console.log("======>",item);
     return (
       
         <Container>
+            <NavLink to={`/Product/data/${item._id}`}>
         <Wrapper>
+
             <Image src={item.img}/>
            
         </Wrapper>
+        </NavLink>
     </Container>
     )
 }
  
 const Container = styled.div`
 flex:1;
+display:flex;
 `;
 
 const Wrapper = styled.div`
 height:300px;
+display:flex;
 width: 320px;
 flex:1;
 overflow: visible;
@@ -25,7 +32,7 @@ transition:all 0.5s ease;
 justify-content:space-between;  
 align-items:center;
 ${Mobile({height:"200px",width:"155px",justifyContent:"space-between",margin:"1px auto"})};
-/* background-color: red; */
+/* background-color: red; */    
 
 
 `;

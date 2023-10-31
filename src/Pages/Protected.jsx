@@ -8,7 +8,7 @@ function Protected(props){
         if(!login){
           navigate("/Login");
         }
-    })
+    },[])
     return(
         <div>
         <Component />
