@@ -4,8 +4,9 @@ function Protected(props){
     const {Component}=props;
     const navigate=useNavigate();
     useEffect(()=>{
-        const login=localStorage.getItem("login");
-        if(!login){
+        let login=localStorage.getItem("login");
+        console.log("🚀 ~ file: Protected.jsx:9 ~ useEffect ~ type:", login)
+        if(login==="false"){
           navigate("/Login");
         }
     },[])

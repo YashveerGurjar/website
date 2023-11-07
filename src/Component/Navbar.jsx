@@ -1,67 +1,80 @@
 import React, { useState } from "react";
-import { Grid, AppBar, Toolbar, Typography, Tab, Tabs,Box, Button,useTheme,useMediaQuery,} from '@mui/material';
+import { Grid, AppBar, Toolbar, Typography, Tab, Tabs, Box, Button, useTheme, useMediaQuery, } from '@mui/material';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import DrawerComp from "./Drawer";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import {Badge} from "@mui/material";
+import { Badge } from "@mui/material";
 function Navbar() {
-    const quan=useSelector((state)=>state.cart.quantity)
-    console.log("quantity in state",quan);
-    const navigate=useNavigate();
-    const links=["Products","About Us"]
+    const quan = useSelector((state) => state.cart.quantity)
+    let checkLogin = localStorage.getItem('login');
+    // console.log("quantity in state",quan);
+     let Seller= localStorage.getItem('Seller');
+    const navigate = useNavigate();
+    const links = ["Products", "About Us"]
     const theme = useTheme();
-    const isMatch= useMediaQuery(theme.breakpoints.down("sm"));
-    console.log(isMatch);
+    const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
+    // console.log(isMatch);
     const [value, setValue] = useState();
     const cartValue = JSON.parse(localStorage.getItem('carttty'));
-    
+    function handleSignout() {
+        localStorage.setItem('login', false);
+        navigate("/Login");
+    }
     return (
-        <AppBar sx={{backgroundColor:"#fff",position:"sticky",top:"0"}}>
+        <AppBar sx={{ backgroundColor: "#fff", position: "sticky", top: "0" }}>
             <Toolbar>
-            {isMatch ?<>
-              
-                <DrawerComp links={links}/>
-                
-                <ShoppingCartCheckoutIcon sx={{marginLeft:"auto",placeItems: "center",fontSize:"30px",}}/>
-            
-            </> : <Grid container sx={{ placeItems: "center" }}>
+                {isMatch ? <>
+
+                    <DrawerComp links={links} />
+
+                    <ShoppingCartCheckoutIcon sx={{ marginLeft: "auto", placeItems: "center", fontSize: "30px", }} />
+
+                </> : <Grid container sx={{ placeItems: "center" }}>
                     <Grid item xs={4}>
-                        <Typography sx={{color:'#25435A',fontSize:"30px",fontFamily:'cursive',fontWeight:'bold'}}>
+                        <Typography sx={{ color: '#25435A', fontSize: "30px", fontFamily: 'cursive', fontWeight: 'bold' }}>
                             Fashion show
                         </Typography>
                     </Grid>
                     <Grid item xs={1}></Grid>
-                    <Grid item xs={4}>
-                        {/* <Tabs sx={{marginLeft:'auto',color:'#000' }}indicatorColor="secondary"
-                            textColor="inherit"
-                            value={value}
-                            onChange={(e,val) => { setValue(val) }}>
 
-                            {links.map((link, index) => (
-                                <Tab key={index} label={link} />
-                            ))}
-
-                        </Tabs> */}
-
-                    </Grid>
-                    <Grid item xs={1} />
                     <Grid item xs={2}>
-                        <Box display="flex">
-                            <Button onClick={()=>{navigate("/Login")}}
-                             sx={{marginLeft:"auto",backgroundColor:"#88BDBC"}} 
-                             variant="contained">Login</Button>
-                            <Button onClick={()=>{navigate("/Register")}}
-                             sx={{marginLeft:2,backgroundColor:"#88BDBC"}}
-                             variant="contained">Rigester</Button>   
-                             <Badge badgeContent={quan} color="success" >     
-                            <ShoppingCartCheckoutIcon onClick={()=>{navigate("/cart")}} 
-                            sx={{cursor:'pointer',marginLeft:3,placeItems: "center",fontSize:"30px",color:'#000'}}/>
-                        </Badge>
-                        </Box>      
                     </Grid>
+
+                    <Grid item xs={1}  />
+                    {checkLogin === "true" ?
+                        <Grid item lg={4}>
+                            <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems:"center"}}>
+                                {Seller==="true" ?
+                            <Button sx={{ marginLeft: "auto", backgroundColor: "#88BDBC"}} onClick={() => { navigate("/Addproduct") }}
+                                    variant="contained">Add Product</Button>
+                                    :
+                                    null
+                                }
+                                <Button onClick={handleSignout} 
+                                    sx={{ marginLeft: 2, backgroundColor: "#88BDBC" }}
+                                    variant="contained">Sign out</Button>
+                                <Badge badgeContent={quan} color="success" >
+                                    <ShoppingCartCheckoutIcon onClick={() => { navigate("/cart") }}
+                                        sx={{ cursor: 'pointer', marginLeft: 3, placeItems: "center", fontSize: "30px", color: '#000' }} />
+                                </Badge>
+                            </Box>
+                        </Grid>
+                        :
+                        <Grid item lg={4}>
+                            <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems:"center"}} >                          
+                              <Button onClick={() => { navigate("/Login") }}
+                                    sx={{ marginLeft: "auto", backgroundColor: "#88BDBC" }}
+                                    variant="contained">Login</Button>
+                                <Button onClick={() => { navigate("/Register") }}
+                                    sx={{ marginLeft: 2, backgroundColor: "#88BDBC" }}
+                                    variant="contained">Rigester</Button>
+
+                            </Box>
+                        </Grid>                     
+                    }
                 </Grid>
-             }   
+                }
             </Toolbar>
         </AppBar>
     )

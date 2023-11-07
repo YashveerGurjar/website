@@ -5,72 +5,87 @@ import { styled } from "styled-components";
 import MixProduct from "./MixProduct";
 import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
-import {Start,Success,Fail}  from '../Redux/allproductreducer';
+import { Start, Success, Fail } from '../Redux/allproductreducer';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
+function AllProduct({ cat, filterdata }) {
+    let Seller = localStorage.getItem('Seller');
 
-
-function AllProduct({cat,filterdata}) {
-    const {isFetching}=useSelector((state)=>state.product);
+    const { isFetching } = useSelector((state) => state.product);
+    const sellerProduct = useSelector((state) => state.sellerProduct.Sellerproduct)
+    console.log("🚀 ~ file: AllProduct.jsx:17 ~ AllProduct ~ sellerProduct:", sellerProduct)
     // console.log("data in fillllllllll",filterdata);
     // const allProData=useSelector((state)=>state.product);
-    if(cat){
+    if (cat) {
         var catdata = cat.toLowerCase();
     }
-    const dataCategory=useSelector((state)=>state.product)
+    const dataCategory = useSelector((state) => state.product)
     // console.log("data in redux all data=====>",dataCategory);
-    const dispatch=useDispatch()
+    const dispatch = useDispatch()
     // const [product,setProduct]=useState([]);
-    const [filterproduct,setFilterProduct]=useState([]);
+    const [filterproduct, setFilterProduct] = useState([]);
 
-    const getProduct= async()=>{
+    const getProduct = async () => {
+
+
         dispatch(Start())
-        try{
-            
-            const res=await axios.get(catdata ? `http://localhost:5000/api/product/Find?category=${catdata}`
-            : "http://localhost:5000/api/product/Find");
+        try {
 
-            console.log("data from backend",res.data);
-            if(res.data.length>0)
-             dispatch(Success(res.data));
+            const res = await axios.get(catdata ? `http://localhost:5000/api/product/Find?category=${catdata}`
+                : "http://localhost:5000/api/product/Find");
 
-        }catch(err){
+            console.log("data from backend", res.data);
+            if (res.data.length > 0)
+                dispatch(Success(res.data));
+
+        } catch (err) {
             dispatch(Fail(err));
         }
-    }    
-    useEffect(()=>{
+    }
+    useEffect(() => {
         dispatch(Success([]));
-       
-        getProduct(); 
+        if (Seller === "false") {
+            getProduct();
+        }
 
-    },[cat])
+    }, [cat])
 
-    useEffect(()=>{
+    useEffect(() => {
         filterdata && setFilterProduct(
-            dataCategory.allData.filter((item)=>
-                Object.entries(filterdata).every(([key,val])=>
-                item[key].includes(val))
+            dataCategory.allData.filter((item) =>
+                Object.entries(filterdata).every(([key, val]) =>
+                    item[key].includes(val))
             )
         )
-    },[cat,filterdata,dataCategory])
+    }, [cat, filterdata, dataCategory])
 
-            console.log("data after gettting ====>",filterproduct);
-            return (
+    console.log("data after gettting ====>", filterproduct);
+    return (
         <Container>
-            <Component>
+            {Seller === "false" ?
+                <Component>
+                    {
+                        isFetching ?
+                            <Box sx={{
+                                display: 'flex', marginLeft: "42%"
+                            }}>
+                                <CircularProgress style={{ height: "200px", width: "200px", color: "blue" }} />
+                            </Box>
+                            :
+                            filterproduct.map((product) => (
+                                <MixProduct item={product} />))
+                    }
+                </Component>
+                :
+                <Component>
+                    {
+                        sellerProduct.map((product) => (
+                            <MixProduct item={product} />))
+                    }
+                </Component>
 
-                {
-                     isFetching ?
-                     <Box sx={{ display:'flex', marginLeft:"42%"
-                     }}>
-                     <CircularProgress  style={{height:"200px",width:"200px", color:"blue"}}  />
-                     </Box>
-                     :
-                    filterproduct.map((product) => (
-                        <MixProduct item={product} />))
-                }
-            </Component>
+            }
         </Container>
     )
 }

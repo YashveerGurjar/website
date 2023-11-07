@@ -31,6 +31,7 @@ function App() {
         <Route path='/Cart' element={<Protected Component={Cart} />} />
         <Route path='/Addproduct' element={<Protected Component={AddProduct} />} />
         <Route path='/*' element={<NoPage /> } />
+        
 
 
       </Routes>
